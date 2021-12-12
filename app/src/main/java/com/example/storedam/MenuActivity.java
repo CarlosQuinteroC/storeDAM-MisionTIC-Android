@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 
 import com.example.storedam.util.Constant;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
     private ActivityMenuBinding binding;
     private SharedPreferences misPreferencias;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +42,10 @@ public class MenuActivity extends AppCompatActivity {
         binding.appBarMenu.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                     //   .setAction("Action", null).show();
+                Navigation.findNavController(MenuActivity.this, R.id.nav_host_fragment_content_menu).navigate(R.id.nav_Producto);
+
             }
         });
         DrawerLayout drawer = binding.drawerLayout;

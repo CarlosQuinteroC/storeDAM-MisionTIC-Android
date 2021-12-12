@@ -77,6 +77,8 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
         <CheckBox
+
+            android:id="@+id/chb_inStock_producto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -96,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:text="Cancelar"></Button>
 
             <Button

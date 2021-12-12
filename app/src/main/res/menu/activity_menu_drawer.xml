@@ -16,10 +16,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
-        <item
+        <!--<item
             android:id="@+id/nav_Producto"
             android:icon="@drawable/ic_baseline_add_box_24"
-            android:title="@string/menu_productos" />
+            android:title="@string/menu_productos" />-->
         <item
             android:id="@+id/nav_salir"
             android:icon="@drawable/ic_baseline_cancel_24"

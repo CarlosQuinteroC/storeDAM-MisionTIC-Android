@@ -1,18 +1,33 @@
 package com.example.storedam;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.example.storedam.databinding.FragmentGalleryBinding;
 import com.example.storedam.databinding.FragmentProductoBinding;
+import com.example.storedam.ui.gallery.GalleryFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.xmlpull.v1.XmlPullParser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +38,10 @@ public class ProductoFragment extends Fragment {
     private Button btn_cancelar_agregar_producto;
     private Button btn_agregar_producto;
     private FragmentProductoBinding binding;
+    private TextInputLayout edt_nombre_producto;
+    private TextInputLayout edt_categoria_producto;
+    private TextInputLayout edt_precio_producto;
+    private CheckBox chb_inStock_producto;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,20 +87,68 @@ public class ProductoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_producto, container, false);
+        // return inflater.inflate(R.layout.fragment_producto, container, false);
 
         binding = FragmentProductoBinding.inflate(inflater, container, false);
         //View myView = inflater.inflate(R.layout.fragment_producto, container, false);
         View root = binding.getRoot();
 
+        edt_nombre_producto = root.findViewById(R.id.edt_nombre_producto);
+        edt_categoria_producto = root.findViewById(R.id.edt_categoria_producto);
+        edt_precio_producto = root.findViewById(R.id.edt_precio_producto);
+        chb_inStock_producto = root.findViewById(R.id.chb_inStock_producto);
+
         btn_cancelar_agregar_producto = root.findViewById(R.id.btn_cancelar_Agregar_producto);
-        btn_agregar_producto=root.findViewById(R.id.btn_agregar_producto);
+        btn_agregar_producto = root.findViewById(R.id.btn_agregar_producto);
+
+        btn_agregar_producto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Access a Cloud Firestore instance from your Activity
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                String nombre = edt_nombre_producto.getEditText().getText().toString();
+                String categoria = edt_categoria_producto.getEditText().getText().toString();
+                int precio = Integer.parseInt(edt_precio_producto.getEditText().getText().toString());
+                boolean inStock = chb_inStock_producto.isChecked();
+
+                // Create a new user with a first and last name
+                Map<String, Object> producto = new HashMap<>();
+                producto.put("nombre", nombre);
+                producto.put("categoria", categoria);
+                producto.put("precio", precio);
+                producto.put("enStock", inStock);
+                producto.put("imagen", "");
 
 
+                // Add a new document with a generated ID
+                db.collection("Productos")
+                        .add(producto)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("TAG", "Error adding document", e);
+                            }
+                        });
+            }
+        });
 
-        /*btn_cancelar_agregar_producto.setOnClickListener();
-        btn_agregar_producto.setOnClickListener(ProductoFragment;*/
 
-return root;
+        btn_cancelar_agregar_producto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_menu).navigate(R.id.nav_Producto);
+            }
+        });
 
-}}
+        return root;
+
+    }
+}
