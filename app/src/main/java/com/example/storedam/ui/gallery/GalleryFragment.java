@@ -118,7 +118,7 @@ public class GalleryFragment extends Fragment {
                                 int precio = Integer.parseInt(document.getData().get("precio").toString());
                                 boolean enstock = Boolean.parseBoolean(document.getData().get("enStock").toString());
                                 String imagen = document.getData().get("imagen").toString();
-                                /*int cantidad = Integer.parseInt(document.getData().get("cantidad").toString());
+                                ///*int cantidad = Integer.parseInt(document.getData().get("cantidad").toString());
 
                                 Double latitud;
                                 Double longitud;
@@ -128,7 +128,7 @@ public class GalleryFragment extends Fragment {
                                 } catch (Exception e) {
                                     latitud = 0.0;
                                     longitud = 0.0;
-                                }*/
+                                }
 
 
                                 JSONObject producto = new JSONObject();
@@ -139,9 +139,9 @@ public class GalleryFragment extends Fragment {
                                     producto.put("precio", precio);
                                     producto.put("enStock", enstock);
                                     producto.put("imagen", imagen);
-                                    /*producto.put("latitud", latitud);
+                                    producto.put("latitud", latitud);
                                     producto.put("longitud", longitud);
-                                    producto.put("cantidad", cantidad);*/
+                                   // producto.put("cantidad", cantidad);
 
                                     productos.put(producto);
                                 } catch (JSONException e) {
@@ -154,9 +154,6 @@ public class GalleryFragment extends Fragment {
                             mAdapter = new ProductosAdapter(productos, getActivity());
 
                             rev_productos.setAdapter(mAdapter);
-
-
-
 
                         } else {
                             Log.e("TAG", "Error getting documents: ", task.getException());
@@ -264,6 +261,19 @@ class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder>
                 public void onClick(View v) {
                     try {
                         Log.e("PRODUCTO_FAVORITO", productos.getJSONObject(position).toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+            holder.btn_item_carrito.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Log.e("Agregado al Carrito: ", productos.getJSONObject(position).toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
