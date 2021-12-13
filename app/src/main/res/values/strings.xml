@@ -56,6 +56,9 @@ DAM store está altamente comprometido para cumplir con el compromiso de mantene
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_salir">Salir</string>
-    <string name="seleccionar_imagen">Seleccionar Imagen</string>
+    <string name="seleccionar_imagen">Sel. Imagen</string>
+    <string name="title_activity_mapa">MapaActivity</string>
+    <string name="seleccionar_ubicacion">Seleccionar ubicacion</string>
+    <string name="aceptar">Aceptar</string>
 
 </resources>

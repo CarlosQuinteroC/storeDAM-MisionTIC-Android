@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.storedam.util.Utilidades;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -96,7 +97,7 @@ public class RegistroActivity extends AppCompatActivity {
                     setResult(Activity.RESULT_OK,resultIntent);
                     finish();*/
                     //registrarUsuarioFirebase(correo, contrasena );
-                    registrarUsuarioFirestore(nombre,apellido,correo,contrasena);
+                    registrarUsuarioFirestore(nombre,apellido,correo, Utilidades.md5(contrasena));
                 }
             }
         });

@@ -47,14 +47,14 @@ public class DetalleProductoActivity extends AppCompatActivity {
                 Log.e("NOMBRE ELEGIDO", producto.getString("nombre"));
 
 
-//                String nombre = producto.getString("nombre");
+                String nombre = producto.getString("nombre");
                 String categoria = producto.getString("categoria");
                 String precio = producto.getString("precio");
                 boolean enStock = producto.getBoolean("enStock");
 
                 String imagen = producto.getString("imagen");
 
-                //tev_nombre_detalle.setText(nombre);
+                tev_nombre_detalle.setText(nombre);
                 tev_categoria_detalle.setText(categoria);
                 tev_precio_detalle.setText(precio);
 

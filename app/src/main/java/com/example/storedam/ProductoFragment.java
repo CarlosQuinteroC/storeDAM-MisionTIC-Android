@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.storedam.databinding.FragmentGalleryBinding;
@@ -63,9 +64,17 @@ public class ProductoFragment extends Fragment {
     private Button btn_seleccionar_imagen;
     private ImageView imv_producto_imagen;
     private Button btn_cargar_imagen;
+    private Button btn_seleccionar_ubicacion;
+
+    private TextView tev_producto_ubicacion;
+
     final int OPEN_GALLERY = 1;
+    final int OPEN_MAPA = 2;
     Uri data1;
-String urlImage;
+    String urlImage;
+
+    Double latitud;
+    Double longitud;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -128,6 +137,8 @@ String urlImage;
         btn_agregar_producto = root.findViewById(R.id.btn_agregar_producto);
         btn_seleccionar_imagen = root.findViewById(R.id.btn_seleccionar_imagen);
         btn_cargar_imagen = root.findViewById(R.id.btn_cargar_imagen);
+        btn_seleccionar_ubicacion = root.findViewById(R.id.btn_seleccionar_ubicacion);
+        tev_producto_ubicacion = root.findViewById(R.id.tev_producto_ubicacion);
 
         btn_agregar_producto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +159,9 @@ String urlImage;
                 producto.put("precio", precio);
                 producto.put("enStock", inStock);
                 producto.put("imagen", urlImage);
+                producto.put("latitud", latitud);
+                producto.put("longitud", longitud);
+                //producto.put("cantidad", cantidad);
 
 
                 // Add a new document with a generated ID
@@ -160,8 +174,12 @@ String urlImage;
                                 Toast.makeText(getActivity(), "El producto ha sido agregado", Toast.LENGTH_SHORT).show();
                                 edt_nombre_producto.getEditText().setText("");
                                 edt_categoria_producto.getEditText().setText("");
-                                edt_nombre_producto.getEditText().setText("");
+                                edt_precio_producto.getEditText().setText("");
                                 chb_inStock_producto.setChecked(false);
+                                tev_producto_ubicacion.setText("Ubicacion");
+
+
+                                imv_producto_imagen.setImageDrawable(getActivity().getDrawable(R.drawable.ic_baseline_add_photo_alternate_24));
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -199,6 +217,14 @@ String urlImage;
             }
         });
 
+        btn_seleccionar_ubicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapaActivity.class);
+                startActivityForResult(intent, OPEN_MAPA);
+            }
+        });
+
         return root;
 
     }
@@ -221,6 +247,13 @@ String urlImage;
                 }
             } else {
                 Toast.makeText(getActivity(), "Error con la imagen", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == OPEN_MAPA) {
+            if (resultCode == Activity.RESULT_OK) {
+                latitud = data.getDoubleExtra("latitud", 0);
+                longitud = data.getDoubleExtra("longitud", 0);
+
+                tev_producto_ubicacion.setText("Ubicación: " + latitud + " - " + longitud);
             }
         }
     }

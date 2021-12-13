@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.storedam.util.Constant;
+import com.example.storedam.util.Utilidades;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -57,8 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String usuario = misPreferencias.getString("usuario", "");
         String contrasena = misPreferencias.getString("contraseña", "");
         String nombre = misPreferencias.getString("nombre", "");
+        String imagen = misPreferencias.getString("imagen", "");
+
         if(!usuario.equals("") && !contrasena.equals("")){
-            toLogin(usuario, contrasena, nombre);
+            toLogin(usuario, contrasena, nombre,imagen);
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -74,15 +77,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String usuario = edt_usuario.getEditText().getText().toString();
                 String contrasena = edt_contrasena.getEditText().getText().toString();
 
+
                 Log.e("USUARIO", usuario);
                 Log.e("CONTRASEÑA", contrasena);
 
                 if (usuario.equals("admin@admin.com") && contrasena.equals("admin")) {
-                    toLogin(usuario, contrasena, "admin");
+                    toLogin(usuario, contrasena, "admin", "");
                 } else {
                     //Toast.makeText(this, "Error iniciando sesion", Toast.LENGTH_SHORT).show();
                     //inicioSesionFirebase(usuario, contrasena);
-                    inicioSesionFireStore(usuario, contrasena);
+                    inicioSesionFireStore(usuario, Utilidades.md5(contrasena));
                 }
 
                 break;
@@ -109,8 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         String userContrasena = document.getData().get("contrasena").toString();
                         String userNombre = document.getData().get("nombre").toString();
+                        //String userImagen = document.getData().get("imagen").toString();
                         if (contrasena.equals(userContrasena)){
-                            toLogin(correo,contrasena, userNombre);
+                            toLogin(correo,contrasena, userNombre, "");
                         }else {
                             Toast.makeText(MainActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                         }
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.e("TAG", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            toLogin(usuario, contrasena, "");
+                            toLogin(usuario, contrasena, "", "");
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -146,13 +151,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
-    public void toLogin(String usuario, String contrasena, String nombre){
+    public void toLogin(String usuario, String contrasena, String nombre, String imagen){
         Toast.makeText(this, "Se ha inciado Sesion", Toast.LENGTH_SHORT).show();
 
         SharedPreferences.Editor editor = misPreferencias.edit();
         editor.putString("usuario", usuario);
         editor.putString("contraseña", contrasena);
         editor.putString("nombre", nombre);
+        editor.putString("imagen", imagen);
         editor.commit();
 
         Intent intent = new Intent(this, MenuActivity.class);
@@ -169,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (resultCode == Activity.RESULT_OK){
                     String usuario = data.getStringExtra("correo");
                     String contrasena = data.getStringExtra("contraseña");
-                    toLogin(usuario, contrasena, "");
+                    toLogin(usuario, contrasena, "", "");
                 }
             }
     }

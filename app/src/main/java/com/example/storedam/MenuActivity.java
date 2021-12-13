@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.storedam.util.Constant;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -98,6 +101,8 @@ public class MenuActivity extends AppCompatActivity {
 
                     editor.putString("usuario", "");
                     editor.putString("contrasena", "");
+                    editor.putString("nombre", "");
+                    editor.putString("imagen", "");
                     editor.commit();
 
                     //editor.clear();
@@ -120,7 +125,7 @@ public class MenuActivity extends AppCompatActivity {
         //recibo parametros enviados desde MainActivity
        Bundle bundle = getIntent().getExtras();
        if(bundle != null){
-           Log.e("Bundle_usuario", (String) bundle.get("Usuario"));
+           Log.e("Bundle_usuario", (String) bundle.get("usuario"));
            Log.e("Bundle_contraseña", bundle.getString("contraseña") );
            //Log.e("Bundle_value", bundle.getString("value") );
        }
@@ -129,6 +134,7 @@ public class MenuActivity extends AppCompatActivity {
         String usuario = misPreferencias.getString("usuario", "NO HAY USUARIO");
         String contrasena = misPreferencias.getString("contraseña", "NO HAY CONTRASEÑA");
         String nombre = misPreferencias.getString("nombre", "NO HAY NOMBRE");
+        String imagen = misPreferencias.getString("imagen", "");
 
         View headerView = navigationView.getHeaderView(0);
         TextView navNombre = headerView.findViewById(R.id.tev_header_nombre);
@@ -148,6 +154,11 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+
+        Glide.with(miactividad)
+                .load(imagen)
+                .placeholder(new ColorDrawable(Color.BLACK))
+                .into(navImage);
 
         navNombre.setText(nombre);
         navCorreo.setText(usuario);
