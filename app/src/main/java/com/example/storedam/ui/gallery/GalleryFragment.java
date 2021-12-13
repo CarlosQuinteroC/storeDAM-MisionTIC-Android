@@ -94,7 +94,7 @@ public class GalleryFragment extends Fragment {
             //rev_productos.setAdapter(mAdapter);
             JSONObject producto0 = jsonProductos.getJSONObject(0);
             String nombre = producto0.getString("nombre");
-            Toast.makeText(getActivity(), "Nombre: "+ nombre, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "Nombre: "+ nombre, Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             e.printStackTrace();
         }

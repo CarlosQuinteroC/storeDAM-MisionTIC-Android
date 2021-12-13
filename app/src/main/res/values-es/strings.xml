@@ -60,5 +60,9 @@ DAM store está altamente comprometido para cumplir con el compromiso de mantene
     <string name="title_activity_mapa">MapaActivity</string>
     <string name="seleccionar_ubicacion">Seleccionar ubicacion</string>
     <string name="aceptar">Aceptar</string>
+    <string name="favorites">Favoritos</string>
+    <string name="shopping_cart">Carrito</string>
+    <string name="carrito_de_compras">Carrito de compras</string>
+    <string name="favoritos">Favoritos</string>
 
 </resources>

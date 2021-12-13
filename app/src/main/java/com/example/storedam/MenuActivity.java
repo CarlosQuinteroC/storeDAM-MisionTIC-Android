@@ -113,6 +113,12 @@ public class MenuActivity extends AppCompatActivity {
                     finish();
                     return true;
 
+                }else if (id == R.id.nav_favoritos){
+                    Intent intent = new Intent(MenuActivity.this, FavoritosActivity.class);
+                    startActivity(intent);
+                }else if (id == R.id.nav_carrito){
+                    Intent intent = new Intent(MenuActivity.this, CarritoActivity.class);
+                    startActivity(intent);
                 }
                 //This is for maintaining the behavior of the Navigation view
                 NavigationUI.onNavDestinationSelected(menuItem,navController);
