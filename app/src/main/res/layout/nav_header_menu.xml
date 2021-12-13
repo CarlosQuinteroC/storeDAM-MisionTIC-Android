@@ -13,7 +13,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imv_header_imagen"
         android:layout_width="100dp"
         android:layout_gravity="left"
         android:layout_height="100dp"
@@ -22,6 +22,7 @@
         app:srcCompat="@drawable/dam4" />
 
     <TextView
+        android:id="@+id/tev_header_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -29,7 +30,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tev_header_correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle" />

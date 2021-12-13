@@ -1,19 +1,27 @@
 package com.example.storedam;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.storedam.util.Constant;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,13 +31,31 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.storedam.databinding.ActivityMenuBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
     private SharedPreferences misPreferencias;
+    private Activity miactividad;
+    final int OPEN_GALLERY = 1;
 
+    Uri data1;
+    String urlImage;
+
+    ImageView navImage;
+    String usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +63,7 @@ public class MenuActivity extends AppCompatActivity {
 
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        miactividad = this;
 
         setSupportActionBar(binding.appBarMenu.toolbar);
         binding.appBarMenu.fab.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +128,30 @@ public class MenuActivity extends AppCompatActivity {
        misPreferencias = getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
         String usuario = misPreferencias.getString("usuario", "NO HAY USUARIO");
         String contrasena = misPreferencias.getString("contraseña", "NO HAY CONTRASEÑA");
+        String nombre = misPreferencias.getString("nombre", "NO HAY NOMBRE");
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView navNombre = headerView.findViewById(R.id.tev_header_nombre);
+        TextView navCorreo = headerView.findViewById(R.id.tev_header_correo);
+
+        //ImageView navImage = headerView.findViewById(R.id.imv_header_imagen);
+        navImage = headerView.findViewById(R.id.imv_header_imagen);
+        navImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Seleccione una imagen"), OPEN_GALLERY);
+
+            }
+        });
+
+
+        navNombre.setText(nombre);
+        navCorreo.setText(usuario);
+
     }
 
     @Override
@@ -115,5 +166,104 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == OPEN_GALLERY) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                data1 = data.getData();
+
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data1);
+                    navImage.setImageBitmap(bitmap);
+
+                   subirImagen();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                Toast.makeText(this, "ERROR CON LA IMAGEN", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    public void subirImagen() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+        //if there is a file to upload
+        if (data1 != null) {
+            //displaying a progress dialog while upload is going on
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+            String strDate = sdf.format(c.getTime());
+            String nombreImagen = strDate + ".jpg";
+
+            misPreferencias = getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
+
+            String usuario = misPreferencias.getString("usuario", "NO HAY USUARIO");
+
+
+            StorageReference riversRef = storageReference.child(usuario + "/" + nombreImagen);
+            riversRef.putFile(data1)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //if the upload is successfull
+                            //hiding the progress dialog
+
+                            //and displaying a success toast
+
+                            riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    urlImage = uri.toString();
+                                    Log.e("URL_IMAGE", urlImage);
+
+                                    SharedPreferences.Editor editor = misPreferencias.edit();
+                                    editor.putString("imagen", urlImage);
+                                    editor.commit();
+
+                                    Map<String, Object> data = new HashMap<>();
+                                    data.put("imagen", urlImage);
+
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    db.collection("Usuarios").document(usuario)
+                                            .set(data, SetOptions.merge());
+
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle any errors
+                                }
+                            });
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            //if the upload is not successfull
+                            //hiding the progress dialog
+
+
+                            //and displaying error message
+                            Toast.makeText(miactividad, exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+        //if there is not any file
+        else {
+            //you can display an error toast
+        }
     }
 }

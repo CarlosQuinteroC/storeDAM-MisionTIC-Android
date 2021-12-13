@@ -56,8 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         misPreferencias = getSharedPreferences(Constant.PREFERENCE, MODE_PRIVATE);
         String usuario = misPreferencias.getString("usuario", "");
         String contrasena = misPreferencias.getString("contraseña", "");
+        String nombre = misPreferencias.getString("nombre", "");
         if(!usuario.equals("") && !contrasena.equals("")){
-            toLogin(usuario, contrasena);
+            toLogin(usuario, contrasena, nombre);
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("CONTRASEÑA", contrasena);
 
                 if (usuario.equals("admin@admin.com") && contrasena.equals("admin")) {
-                    toLogin(usuario, contrasena);
+                    toLogin(usuario, contrasena, "admin");
                 } else {
                     //Toast.makeText(this, "Error iniciando sesion", Toast.LENGTH_SHORT).show();
                     //inicioSesionFirebase(usuario, contrasena);
@@ -107,8 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.e("TAG", "DocumentSnapshot data: " + document.getData());
 
                         String userContrasena = document.getData().get("contrasena").toString();
+                        String userNombre = document.getData().get("nombre").toString();
                         if (contrasena.equals(userContrasena)){
-                            toLogin(correo,contrasena);
+                            toLogin(correo,contrasena, userNombre);
                         }else {
                             Toast.makeText(MainActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                         }
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.e("TAG", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            toLogin(usuario, contrasena);
+                            toLogin(usuario, contrasena, "");
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -144,16 +146,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
-    public void toLogin(String usuario, String contrasena){
+    public void toLogin(String usuario, String contrasena, String nombre){
         Toast.makeText(this, "Se ha inciado Sesion", Toast.LENGTH_SHORT).show();
 
         SharedPreferences.Editor editor = misPreferencias.edit();
         editor.putString("usuario", usuario);
         editor.putString("contraseña", contrasena);
+        editor.putString("nombre", nombre);
         editor.commit();
 
         Intent intent = new Intent(this, MenuActivity.class);
-        intent.putExtra("Usuario", usuario);
+        intent.putExtra("usuario", usuario);
         intent.putExtra("contraseña", contrasena);
         intent.putExtra("number", 1);
         startActivity(intent);
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (resultCode == Activity.RESULT_OK){
                     String usuario = data.getStringExtra("correo");
                     String contrasena = data.getStringExtra("contraseña");
-                    toLogin(usuario, contrasena);
+                    toLogin(usuario, contrasena, "");
                 }
             }
     }
