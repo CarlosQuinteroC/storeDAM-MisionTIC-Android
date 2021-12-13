@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/clr_activity_background"
+    tools:context=".RegistroActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_registrar_login"
+            style="@style/tv_titulo">
+        </TextView>
+
+        <EditText
+            android:id="@+id/edt_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txt_nombres"
+            android:inputType="text"
+            style="@style/edt_login"></EditText>
+        <EditText
+            android:id="@+id/edt_apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txt_apellidos"
+            android:inputType="text"
+            style="@style/edt_login"></EditText>
+        <EditText
+            android:id="@+id/edt_correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txt_email"
+            android:inputType="textEmailAddress"
+            style="@style/edt_login"></EditText>
+        <EditText
+            android:id="@+id/edt_contrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txt_contrasena"
+            android:inputType="textPassword"
+            style="@style/edt_login"></EditText>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chb_terminos"
+            style="@style/edt_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></CheckBox>
+
+        <TextView
+            android:id="@+id/link_terminos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_chechbox"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_terminar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_registrar"
+        style="@style/btn_general"></Button>
+    </LinearLayout>
+</LinearLayout>

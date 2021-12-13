@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/c6"
+    android:layout_margin="10dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       android:gravity="center_horizontal"
+        android:layout_weight="50">
+
+        <ImageView
+            android:id="@+id/imv_item_producto"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/ic_baseline_videogame_asset_24">
+    </ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tev_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c8"
+            android:text="Nombre"
+            android:textSize="30dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/tev_item_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c8"
+            android:text="Categoria"
+            android:textSize="30dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/tev_item_precio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c8"
+            android:text="Precio"
+            android:textSize="30dp">
+
+        </TextView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/btn_item_carrito"
+        android:layout_weight="50"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_baseline_add_shopping_cart_24"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/btn_item_favorito"
+        android:layout_weight="50"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_baseline_star_border_24"
+        android:background="@android:color/transparent" />
+
+
+
+
+</LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

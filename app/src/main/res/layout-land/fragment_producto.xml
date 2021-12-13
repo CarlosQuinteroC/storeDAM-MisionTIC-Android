@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c6"
+    android:orientation="vertical"
+
+    tools:context=".ProductoFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <!--<ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/dam2"
+                    android:visibility="gone"></ImageView>-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_add_product"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edt_nombre_producto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/txt_hint_nombre_producto"
+                android:inputType="text"
+                app:startIconContentDescription="@string/txt_name"
+                app:startIconDrawable="@drawable/ic_baseline_add_box_24">
+                <!--   style="@style/edt_login"> -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edt_categoria_producto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/txt_hint_categoria_producto"
+                android:inputType="text"
+                app:startIconContentDescription="@string/txt_name"
+                app:startIconDrawable="@drawable/ic_baseline_add_box_24">
+                <!--   style="@style/edt_login"> -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edt_precio_producto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/txt_hint_precio_producto"
+                android:inputType="number"
+                app:startIconContentDescription="@string/txt_name"
+                app:startIconDrawable="@drawable/ic_baseline_add_box_24">
+                <!--   style="@style/edt_login"> -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+
+                android:id="@+id/chb_inStock_producto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/chb_inStock"
+                android:textColor="@color/white"></CheckBox>
+
+            <Button
+                android:id="@+id/btn_seleccionar_ubicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/seleccionar_ubicacion"></Button>
+
+            <TextView
+                android:id="@+id/tev_producto_ubicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Ubicacion"
+                android:textColor="@color/c8"
+                android:textSize="18sp"></TextView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:id="@+id/btn_seleccionar_imagen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="50"
+                    android:text="@string/seleccionar_imagen"></Button>
+
+
+                <Button
+                    android:id="@+id/btn_cargar_imagen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="50"
+                    android:text="Cargar Imagen"></Button>
+            </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imv_producto_imagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_add_photo_alternate_24"></ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/btn_cancelar_Agregar_producto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="50"
+                android:text="Cancelar"
+                android:visibility="gone"></Button>
+
+            <Button
+                android:id="@+id/btn_agregar_producto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="50"
+                android:text="Agregar"></Button>
+
+        </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+    <!-- TODO: Update blank fragment layout -->
+
+
+</FrameLayout>
