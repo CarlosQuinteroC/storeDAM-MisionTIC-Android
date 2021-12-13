@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">storeDAM</string>
-    <string name="titulo_login">Iniciar Sesion</string>
+    <string name="titulo_login">Sign In</string>
     <string name="str_usuario">USERNAME</string>
     <string name="str_contrasena">PASSWORD</string>
     <string name="txt_iniciar">SIGN IN</string>
@@ -18,8 +18,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="txt_add_product">Agregar Producto</string>
-    <string name="txt_name">Nombre: </string>
+    <string name="txt_add_product">Add Product</string>
+    <string name="txt_name">Name: </string>
     <string name="txt_hint_nombre_producto">Product Name</string>
     <string name="txt_hint_categoria_producto">Product Category</string>
     <string name="txt_hint_precio_producto">Product Price</string>
@@ -29,19 +29,19 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_productos">Products</string>
-    <string name="txt_aceptaTerminos">Aceptar</string>
-    <string name="txt_noAceptaTerminos">No Aceptar</string>
-    <string name="txt_desc_user">Usuario</string>
-    <string name="txt_desc_pass">Contraseña</string>
+    <string name="txt_aceptaTerminos">Agree</string>
+    <string name="txt_noAceptaTerminos">Don´t Agree</string>
+    <string name="txt_desc_user">User</string>
+    <string name="txt_desc_pass">Password</string>
 
     <!-- strings terminos y condiciones -->
-    <string name="title_politica">POLÍTICA DE PRIVACIDAD</string>
-    <string name="txt_p1">El presente Política de Privacidad establece los términos en que DAM store usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo esta Política de Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse que está de acuerdo con dichos cambios.</string>
-    <string name="subtxt1">Información que es recogida</string>
-    <string name="txt_p2">Nuestro sitio web podrá recoger información personal por ejemplo: Nombre,  información de contacto como  su dirección de correo electrónica e información demográfica. Así mismo cuando sea necesario podrá ser requerida información específica para procesar algún pedido o realizar una entrega o facturación.</string>
-    <string name="subtxt2">Uso de la información recogida</string>
-    <string name="txt_p3">Nuestro sitio web emplea la información con el fin de proporcionar el mejor servicio posible, particularmente para mantener un registro de usuarios, de pedidos en caso que aplique, y mejorar nuestros productos y servicios.  Es posible que sean enviados correos electrónicos periódicamente a través de nuestro sitio con ofertas especiales, nuevos productos y otra información publicitaria que consideremos relevante para usted o que pueda brindarle algún beneficio, estos correos electrónicos serán enviados a la dirección que usted proporcione y podrán ser cancelados en cualquier momento.
-DAM store está altamente comprometido para cumplir con el compromiso de mantener su información segura. Usamos los sistemas más avanzados y los actualizamos constantemente para asegurarnos que no exista ningún acceso no autorizado.
+    <string name="title_politica">TERMS OF USE</string>
+    <string name="txt_p1">This Privacy Policy establishes the terms in which DAM store uses and protects the information that is provided by its users when using its website. This company is committed to the security of its users data. When we ask you to fill in the fields of personal information with which you can be identified, we do so ensuring that it will only be used in accordance with the terms of this document. However, this Privacy Policy may change over time or be updated, so we recommend and emphasize that you continually review this page to ensure that you agree with said changes.</string>
+    <string name="subtxt1">Information that is collected</string>
+    <string name="txt_p2">Our website may collect personal information such as: Name, contact information such as your email address and demographic information. Likewise, when necessary, specific information may be required to process an order or make a delivery or billing. </string>
+    <string name="subtxt2">Use of collected information</string>
+    <string name="txt_p3">Our website uses the information in order to provide the best possible service, particularly to maintain a user registry, of orders, if applicable, and to improve our products and services. It is possible that emails will be sent periodically through our site with special offers, new products and other advertising information that we consider relevant to you or that may provide you with some benefit, these emails will be sent to the address you provide and may be canceled. anytime.
+DAM store is highly committed to fulfilling the commitment to keep your information secure. We use the most advanced systems and constantly update them to ensure that there is no unauthorized access.
 </string>
 
 
@@ -56,9 +56,9 @@ DAM store está altamente comprometido para cumplir con el compromiso de mantene
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_salir">Salir</string>
-    <string name="seleccionar_imagen">Sel. Imagen</string>
+    <string name="seleccionar_imagen"> Sel. PictureImagen</string>
     <string name="title_activity_mapa">MapaActivity</string>
-    <string name="seleccionar_ubicacion">Seleccionar ubicacion</string>
-    <string name="aceptar">Aceptar</string>
+    <string name="seleccionar_ubicacion">Sel. location</string>
+    <string name="aceptar">Acept</string>
 
 </resources>

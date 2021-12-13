@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="clr_titulo_login">#00897B</color>
+    <color name="clr_activity_background">#F9FBE7</color>
+    <color name="clr_button">#FFFFFFFF</color>
+
+
+    <color name="c1">#11798F</color>
+    <color name="c2">#E3F2FD</color>
+    <color name="c3">#42C0DB</color>
+    <color name="c4">#8F5726</color>
+    <color name="c5">#E8FFF8E1</color>
+
+    <color name="c6">#274082</color>
+    <color name="c7">#f14624</color>
+    <color name="c8">#f2f2f2</color>
+
+
+
+
+</resources>
